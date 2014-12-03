@@ -57,10 +57,7 @@ class Module
     define_type(:float, Float)
     define_type(:double, Float)
     define_type(:bool, Boolean)
-
-    def char(meth)
-      define_typed_method(meth, :char, String) { |rtn| rtn.length == 1 }
-    end
+    define_type(:char, String) { |rtn| rtn.length == 1 }
 
     def define_typed_method(meth, type, type_klass, &condition)
       __java__.send(:define_method, meth) do |*args, &block|
