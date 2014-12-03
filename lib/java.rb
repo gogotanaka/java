@@ -53,10 +53,7 @@ class Module
     define_type(:int, Integer) { |rtn| ::Java::INT === rtn }
     define_type(:long, Integer) { |rtn| ::Java::LONG === rtn }
     define_type(:float, Float)
-
-    def double(meth)
-      define_typed_method(meth, :double, Float)
-    end
+    define_type(:double, Float)
 
     def bool(meth)
       define_typed_method(meth, :bool, Boolean)
