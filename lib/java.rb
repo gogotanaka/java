@@ -47,9 +47,7 @@ class Module
       @__java__
     end
 
-    def void(meth)
-      define_typed_method(meth, :void, NilClass)
-    end
+    define_type(:void, NilClass)
 
     def byte(meth)
       define_typed_method(meth, :byte, Integer) { |rtn| ::Java::BYTE === rtn }
