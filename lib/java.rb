@@ -40,24 +40,12 @@ module Kernel
   end
 end
 
-module Boolean; end
-
 class Module
   private
     def __java__
       prepend (@__java__ = Module.new) unless @__java__
       @__java__
     end
-
-    define_type(:void, NilClass)
-    define_type(:byte, Integer) { |rtn| ::Java::BYTE === rtn }
-    define_type(:short, Integer) { |rtn| ::Java::SHORT === rtn }
-    define_type(:int, Integer) { |rtn| ::Java::INT === rtn }
-    define_type(:long, Integer) { |rtn| ::Java::LONG === rtn }
-    define_type(:float, Float)
-    define_type(:double, Float)
-    define_type(:bool, Boolean)
-    define_type(:char, String) { |rtn| rtn.length == 1 }
 
     def define_typed_method(meth, type, type_klass, &condition)
       __java__.send(:define_method, meth) do |*args, &block|
@@ -66,5 +54,17 @@ class Module
     end
 end
 
+module Boolean; end
+
 TrueClass.send(:include, Boolean)
 FalseClass.send(:include, Boolean)
+
+define_type(:void, NilClass)
+define_type(:byte, Integer) { |rtn| ::Java::BYTE === rtn }
+define_type(:short, Integer) { |rtn| ::Java::SHORT === rtn }
+define_type(:int, Integer) { |rtn| ::Java::INT === rtn }
+define_type(:long, Integer) { |rtn| ::Java::LONG === rtn }
+define_type(:float, Float)
+define_type(:double, Float)
+define_type(:bool, Boolean)
+define_type(:char, String) { |rtn| rtn.length == 1 }
