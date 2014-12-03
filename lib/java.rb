@@ -50,10 +50,7 @@ class Module
     define_type(:void, NilClass)
     define_type(:byte, Integer) { |rtn| ::Java::BYTE === rtn }
     define_type(:short, Integer) { |rtn| ::Java::SHORT === rtn }
-
-    def int(meth)
-      define_typed_method(meth, :int, Integer) { |rtn| ::Java::INT === rtn }
-    end
+    define_type(:int, Integer) { |rtn| ::Java::INT === rtn }
 
     def long(meth)
       define_typed_method(meth, :long, Integer) { |rtn| ::Java::LONG === rtn }
