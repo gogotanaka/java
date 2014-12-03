@@ -40,6 +40,8 @@ module Kernel
   end
 end
 
+module Boolean; end
+
 class Module
   private
     def __java__
@@ -54,10 +56,7 @@ class Module
     define_type(:long, Integer) { |rtn| ::Java::LONG === rtn }
     define_type(:float, Float)
     define_type(:double, Float)
-
-    def bool(meth)
-      define_typed_method(meth, :bool, Boolean)
-    end
+    define_type(:bool, Boolean)
 
     def char(meth)
       define_typed_method(meth, :char, String) { |rtn| rtn.length == 1 }
@@ -69,8 +68,6 @@ class Module
       end
     end
 end
-
-module Boolean; end
 
 TrueClass.send(:include, Boolean)
 FalseClass.send(:include, Boolean)
